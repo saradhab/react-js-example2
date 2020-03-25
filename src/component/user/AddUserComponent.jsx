@@ -22,13 +22,26 @@ class AddUserComponent extends Component{
     saveUser = (e) => {
         e.preventDefault();
         let user = {user_id: this.state.user_id, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password, email: this.state.email, mobile_number: this.state.mobile_number,middle_name: this.state.middle_name};
+        let user1 =       {      user_id: '',
+                                first_name: '',
+                                last_name: '',
+                                password: '',
+                                email: '',
+                                mobile_number: '',
+                                middle_name: ''};
    //     ApiService.addUser(user)
 
            axios.post(USER_API_BASE_URL1, user)
             .then(res => {
-                this.setState({message : 'User added successfully.'});
+                this.setState({user1});
                 //this.props.history.push('/users');
-            });
+                   alert("USER DATA UPDATED SUCCESSFULLY!");
+
+            })
+            .catch(function (error) {
+                   alert("ERROR: "+error);
+             });
+             window.location.reload();
     }
 
     onChange = (e) =>
