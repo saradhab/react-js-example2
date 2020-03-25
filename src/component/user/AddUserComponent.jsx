@@ -17,7 +17,15 @@ class AddUserComponent extends Component{
             middle_name: ''
         }
         this.saveUser = this.saveUser.bind(this);
+        this.goHome = this.goHome.bind(this);
+
     }
+
+    goHome = (e) => {
+        e.preventDefault();
+         this.props.history.push('/users');
+    }
+
 
     saveUser = (e) => {
         e.preventDefault();
@@ -34,14 +42,14 @@ class AddUserComponent extends Component{
            axios.post(USER_API_BASE_URL1, user)
             .then(res => {
                 this.setState({user1});
-                //this.props.history.push('/users');
-                   alert("USER DATA UPDATED SUCCESSFULLY!");
+                 alert("USER DATA UPDATED SUCCESSFULLY!");
+                this.props.history.push('/users');
 
             })
             .catch(function (error) {
                    alert("ERROR: "+error);
              });
-             window.location.reload();
+             //window.location.reload();
     }
 
     onChange = (e) =>
@@ -87,7 +95,9 @@ class AddUserComponent extends Component{
                     <input type="text" placeholder="middle_name" name="middle_name" className="form-control" value={this.state.middle_name} onChange={this.onChange}/>
                 </div>
 
-                <button className="btn btn-success" onClick={this.saveUser}>Save</button>
+                 <button className="btn btn-success" onClick={this.saveUser}>Save</button> &nbsp;&nbsp;&nbsp;
+                 <button className="btn btn-success" onClick={this.goHome}>BACK</button>
+
             </form>
     </div>
         );
