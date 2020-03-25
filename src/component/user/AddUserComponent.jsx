@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import ApiService from "../../service/ApiService";
+import axios from 'axios';
+const USER_API_BASE_URL1 = 'http://localhost:9090/users';
 
 class AddUserComponent extends Component{
 
@@ -20,10 +22,12 @@ class AddUserComponent extends Component{
     saveUser = (e) => {
         e.preventDefault();
         let user = {user_id: this.state.user_id, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password, email: this.state.email, mobile_number: this.state.mobile_number,middle_name: this.state.middle_name};
-        ApiService.addUser(user)
+   //     ApiService.addUser(user)
+
+           axios.post(USER_API_BASE_URL1, user)
             .then(res => {
                 this.setState({message : 'User added successfully.'});
-                this.props.history.push('/users');
+                //this.props.history.push('/users');
             });
     }
 
@@ -37,7 +41,7 @@ class AddUserComponent extends Component{
                 <form>
                 <div className="form-group">
                     <label>User ID:</label>
-                    <input type="text" placeholder="user id" name="user_id" className="form-control" value={this.state.user_id} onChange={this.onChange}/>
+                    <input type="number" placeholder="user id" name="user_id" className="form-control" value={this.state.user_id} onChange={this.onChange}/>
                 </div>
 
                 <div className="form-group">
@@ -57,7 +61,7 @@ class AddUserComponent extends Component{
 
                 <div className="form-group">
                     <label>EMAIL:</label>
-                    <input type="number" placeholder="email" name="email" className="form-control" value={this.state.email} onChange={this.onChange}/>
+                    <input type="text" placeholder="email" name="email" className="form-control" value={this.state.email} onChange={this.onChange}/>
                 </div>
 
                 <div className="form-group">
